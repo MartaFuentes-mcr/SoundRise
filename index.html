@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SoundRise — Música que asciende con la fuerza de la comunidad</title>
+  <meta name="description" content="SoundRise: plataforma musical social con streaming, rankings en vivo, donaciones (fiat/crypto), comunidad, gamificación y servicios premium para artistas." />
+  <meta name="theme-color" content="#0b0f14" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%23ff8a00'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='none' stroke='url(%23g)' stroke-width='4'/%3E%3Cpath d='M12 38a20 20 0 0 1 40 0' stroke='url(%23g)' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="SoundRise — Música que se vive y se construye en comunidad" />
+  <meta property="og:description" content="Streaming, rankings en vivo, donaciones (fiat/crypto), comunidad, gamificación y panel pro para artistas." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <!-- Sunrise + equalizer logo -->
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="SoundRise logo">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#7c5cff"/>
+              <stop offset="1" stop-color="#ff8a00"/>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="30" stroke="url(#g)" stroke-width="2"/>
+          <path d="M12 38a20 20 0 0 1 40 0" stroke="url(#g)" stroke-width="3" stroke-linecap="round"/>
+          <rect x="18" y="40" width="4" height="10" rx="2" fill="url(#g)"/>
+          <rect x="26" y="36" width="4" height="14" rx="2" fill="url(#g)"/>
+          <rect x="34" y="42" width="4" height="8" rx="2" fill="url(#g)"/>
+          <rect x="42" y="38" width="4" height="12" rx="2" fill="url(#g)"/>
+        </svg>
+        <div>
+          <h1>SoundRise</h1>
+          <div class="tag">Música que se vive y se construye en comunidad</div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="chip" id="walletChip">
+        <span>Wallet</span>
+        <span class="muted" id="walletAddr">No conectado</span>
+        <button class="btn ghost" id="btnConnect">Conectar</button>
+      </div>
+      <div class="chip">
+        <span>Recompensas</span>
+        <span class="points" id="points">0</span>
+      </div>
+    </div>
+  </header>
+  <div class="banner" id="promoBanner" role="region" aria-label="Anuncio">
+    <div class="container banner-inner">
+      <span class="badge">Beta</span>
+      <span class="banner-text">Únete al programa de fundadores: recompensas x2 esta semana.</span>
+      <div class="spacer"></div>
+      <button class="btn secondary" id="bannerCTA" type="button">Más info</button>
+      <button class="circle" id="bannerClose" type="button" aria-label="Cerrar banner">✕</button>
+    </div>
+  </div>
+
+  <main class="container" role="main">
+    <!-- Hero / Player -->
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-inner">
+          <div class="cover" id="heroCover">
+            <div class="eq"><span></span><span></span><span></span><span></span></div>
+          </div>
+          <div>
+            <div class="badge">Descubre artistas emergentes</div>
+            <h2 style="margin:6px 0 6px">Tu feed sonoro, impulsado por la comunidad</h2>
+            <p class="muted" style="margin:0 0 10px">Escucha, vota, comenta, dona y ayuda a que nuevas voces asciendan. Tú decides qué suena en el próximo amanecer.</p>
+            <div class="pill-tabs" id="tabs">
+              <div class="pill active" data-tab="trending">Tendencias</div>
+              <div class="pill" data-tab="fresh">Novedades</div>
+              <div class="pill" data-tab="genres">Géneros</div>
+            </div>
+          </div>
+          <svg class="logo-burst" width="260" height="260" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#7c5cff"/>
+                <stop offset="1" stop-color="#ff8a00"/>
+              </linearGradient>
+            </defs>
+            <circle cx="32" cy="32" r="30" stroke="url(#g2)" stroke-width="2"/>
+            <path d="M12 38a20 20 0 0 1 40 0" stroke="url(#g2)" stroke-width="3" stroke-linecap="round"/>
+            <rect x="18" y="40" width="4" height="10" rx="2" fill="url(#g2)"/>
+            <rect x="26" y="36" width="4" height="14" rx="2" fill="url(#g2)"/>
+            <rect x="34" y="42" width="4" height="8" rx="2" fill="url(#g2)"/>
+            <rect x="42" y="38" width="4" height="12" rx="2" fill="url(#g2)"/>
+          </svg>
+        </div>
+        <div class="player">
+          <div class="cover" style="width:64px;height:64px" id="playerCover"></div>
+          <div class="track-meta">
+            <div class="track-title" id="playerTitle">—</div>
+            <div class="track-artist" id="playerArtist">—</div>
+          </div>
+          <div class="controls">
+            <button class="circle" id="btnPrev" type="button" aria-label="Anterior" title="Anterior">⏮</button>
+            <button class="circle" id="btnPlay" type="button" aria-label="Reproducir o Pausar" title="Reproducir/Pausa">▶</button>
+            <button class="circle" id="btnNext" type="button" aria-label="Siguiente" title="Siguiente">⏭</button>
+            <button class="circle" id="btnComment" type="button" aria-label="Comentar" title="Comentar">💬</button>
+            <button class="circle" id="btnDonate" type="button" aria-label="Donar o Suscribirse" title="Donar / Suscribirse">💎</button>
+          </div>
+          <audio id="audio" preload="metadata"></audio>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="body" style="padding:18px">
+          <h3 style="margin:0 0 6px">Rankings en vivo</h3>
+          <p class="muted" style="margin:0 0 10px">Vota en tiempo real y mueve a tus artistas favoritos hacia el amanecer.</p>
+          <div class="rank" id="rankList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Descubrimiento -->
+    <section class="section">
+      <h2>Descubrimiento</h2>
+      <div class="grid" id="discoverGrid"></div>
+    </section>
+
+    <section class="section">
+      <h2>Géneros destacados</h2>
+      <div class="hscroll" id="genreChips"></div>
+    </section>
+
+    <!-- Eventos en vivo -->
+    <section class="section">
+      <h2>Eventos en vivo</h2>
+      <div class="events" id="events"></div>
+    </section>
+
+    <section class="section">
+      <h2>Top creadores</h2>
+      <div class="grid creators" id="creatorGrid"></div>
+    </section>
+
+    <section class="section">
+      <h2>Suscripciones destacadas</h2>
+      <div class="grid plans" id="subsGrid"></div>
+    </section>
+
+    <section class="section">
+      <h2>Mezclador (beta)</h2>
+      <div class="mixer" id="mixer">
+        <div class="mx-controls">
+          <div class="chip">BPM
+            <input type="range" id="bpm" min="60" max="180" value="110" />
+            <span id="bpmVal">110</span>
+          </div>
+          <div class="chip">Compás 4/4</div>
+          <div class="chip">Tonalidad
+            <select id="rootSel">
+              <option>C</option><option>C#</option><option>D</option><option>D#</option><option>E</option><option>F</option>
+              <option>F#</option><option>G</option><option>G#</option><option>A</option><option>A#</option><option>B</option>
+            </select>
+            <select id="scaleSel">
+              <option value="major">Mayor</option>
+              <option value="minor">Menor</option>
+            </select>
+          </div>
+          <button class="btn" id="mxPlay" type="button">▶ Reproducir</button>
+          <button class="btn secondary" id="mxClear" type="button">Limpiar</button>
+          <button class="btn ghost" id="mxRec" type="button">⏺ Grabar</button>
+          <div class="chip"><input class="input" id="recName" placeholder="Nombre de la grabación" /></div>
+        </div>
+        <div class="seq" aria-label="Secuenciador 16 pasos">
+          <div class="seq-grid" id="seqGrid"></div>
+        </div>
+        <div class="mx-voice">
+          <h3 style="margin:10px 0">Voz y Autotune</h3>
+          <div class="mx-controls">
+            <button class="btn" id="mxMic" type="button">🎤 Activar micro</button>
+            <label class="chip" style="gap:6px"><input type="checkbox" id="autotuneToggle"/> Autotune</label>
+            <div class="chip">Corrección
+              <input type="range" id="tuneStrength" min="0" max="100" value="70" />
+              <span id="tuneVal">70%</span>
+            </div>
+            <div class="chip">Transposición
+              <input type="range" id="transpose" min="-12" max="12" value="0" />
+              <span id="transposeVal">0</span> st
+            </div>
+          </div>
+          <div class="muted">Nota: el micrófono requiere permisos del navegador y puede requerir HTTPS o localhost.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Servicios premium para artistas -->
+    <section class="section">
+      <h2>Panel pro para artistas</h2>
+      <div class="artist-tools">
+        <div class="stat-card">
+          <h3 style="margin:0 0 8px">Estadísticas de engagement</h3>
+          <div class="kpi" id="kpis"></div>
+        </div>
+        <div class="stat-card">
+          <h3 style="margin:0 0 8px">Promoción y visibilidad</h3>
+          <p class="muted">Activa Boosts, destaca en rankings locales, campañas segmentadas y landing pages para lanzamientos. Integración con redes sociales y kits de prensa automáticos.</p>
+          <button class="btn" id="btnBoost">Activar Boost demo</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Grabaciones</h2>
+      <div class="recordings-controls">
+        <button class="btn secondary" id="recClear" type="button">Vaciar</button>
+      </div>
+      <div class="recordings" id="recordingsList"></div>
+    </section>
+
+    <section class="section">
+      <h2>Importar desde SoundCloud</h2>
+      <div class="mx-controls">
+        <input class="input" id="scUrl" placeholder="Pega una URL de SoundCloud (track, playlist o artista)" />
+        <button class="btn" id="scAdd" type="button">Añadir a playlist</button>
+        <button class="btn secondary" id="scPreview" type="button">Previsualizar</button>
+      </div>
+      <div class="sc-preview" id="scPreviewBox"></div>
+      <div class="muted">Usamos el reproductor oficial de SoundCloud. Para buscar, abre SoundCloud y copia el enlace.</div>
+    </section>
+
+    <section class="section">
+      <h2>Playlist</h2>
+      <div class="recordings-controls">
+        <button class="btn secondary" id="plClear" type="button">Vaciar</button>
+        <button class="btn ghost" id="plExport" type="button">Exportar JSON</button>
+      </div>
+      <div class="playlist" id="playlist"></div>
+      <div class="sc-embed" id="scEmbed"></div>
+    </section>
+
+    <section class="section">
+      <h2>Noticias y lanzamientos</h2>
+      <div class="news" id="newsList"></div>
+    </section>
+
+    <footer>
+      <span>© SoundRise</span>
+      <span>•</span>
+      <span>Minimalista. Moderno. Web3-ready.</span>
+    </footer>
+  </main>
+
+  <!-- Modal: Donaciones / Suscripciones -->
+  <div class="modal-backdrop" id="payModal">
+    <div class="modal">
+      <header class="container nav" style="padding:12px 16px">
+        <div style="font-weight:700">Apoya al artista</div>
+        <div class="spacer"></div>
+        <button class="btn ghost" id="closePay">Cerrar</button>
+      </header>
+      <div class="body">
+        <div class="row">
+          <select id="payType">
+            <option value="donation">Donación única</option>
+            <option value="subscription">Suscripción mensual</option>
+          </select>
+          <select id="currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="ETH">ETH</option>
+            <option value="USDC">USDC</option>
+          </select>
+          <input class="input" id="amount" type="number" min="1" step="1" placeholder="Cantidad" />
+        </div>
+        <div class="wallet">
+          <span>Estado wallet:</span>
+          <span id="walletStatus">No conectado</span>
+        </div>
+        <div class="row">
+          <button class="btn" id="confirmPay">Confirmar</button>
+          <button class="btn secondary" id="mockBigTip">Propina rápida $5</button>
+        </div>
+        <div class="muted" id="payHint">Puedes usar dinero tradicional o crypto. Las transacciones crypto requieren wallet conectada.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Comentarios -->
+  <div class="modal-backdrop" id="commentModal">
+    <div class="modal">
+      <header class="container nav" style="padding:12px 16px">
+        <div style="font-weight:700">Comentarios</div>
+        <div class="spacer"></div>
+        <button class="btn ghost" id="closeComment">Cerrar</button>
+      </header>
+      <div class="body">
+        <div id="commentList" style="display:flex; flex-direction:column; gap:8px; max-height:40vh; overflow:auto"></div>
+        <div class="row">
+          <input class="input" id="commentInput" placeholder="Escribe algo..." />
+          <button class="btn" id="sendComment">Enviar</button>
+        </div>
+        <div class="muted">Gana puntos por participar con respeto. La comunidad modera y destaca los mejores aportes.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-root" aria-live="polite" aria-atomic="true"></div>
+  <noscript><div style="margin:16px; padding:12px 16px; border:1px solid #182233; border-radius:12px; color:#a3b2c6;">Activa JavaScript para usar SoundRise.</div></noscript>
+  <script src="app.js" defer></script>
+</body>
+</html>
